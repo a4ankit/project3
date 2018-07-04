@@ -1,0 +1,7 @@
+project:
+    name: Project3
+    package:
+        name:  Project3
+        api_version: '42.0'
+
+
