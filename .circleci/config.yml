@@ -25,7 +25,7 @@ job-definition: &jobdef
         - run: 
             name: Create Scratch Org
             command: |
-                node_modules/sfdx-cli/bin/run force:auth:jwt:grant --clientid $CONSUMERKEY --jwtkeyfile assets/server.key --username $USERNAME --setdefaultdevhubusername -a DevHub
+                node_modules/sfdx-cli/bin/run force:auth:jwt:grant --clientid $CONSUMERKEY --jwtkeyfile assets/server.key --username $USERNAME --setdefaultdevhubusername -a DevhubOrg
                 echo "Creating scratch org with definition $SCRATCH_DEF"
                 node_modules/sfdx-cli/bin/run force:org:create -v DevHub -s -f "config/$SCRATCH_DEF" -a scratch
         - run:
@@ -90,10 +90,7 @@ jobs:
           key: pmd-v6.0.1
           paths: 
               - pmd-bin-6.0.1
-      - run: 
-          name: Run Static Analysis
-          command: |
-              pmd-bin-6.0.1/bin/run.sh pmd -d . -R $RULESET -f text -l apex -r static-analysis.txt 
+      
       - store_artifacts:
           path: static-analysis.txt
   build-enterprise:
